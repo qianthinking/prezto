@@ -15,7 +15,9 @@ fi
 fpath=("${0:h}/external/src" $fpath)
 
 # Load and initialize the completion system ignoring insecure directories.
-autoload -Uz compinit && compinit -i
+autoload -Uz compinit
+#Will only rebuild ~/.zcompdump once per day
+[[ "" == "`find ~ -maxdepth 1 -name .zcompdump -mtime -1`" ]] && compinit || compinit -C
 
 #
 # Options
